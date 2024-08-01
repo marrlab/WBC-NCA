@@ -1,0 +1,17 @@
+#DATA
+train_set: AML
+name: test
+balance: True
+resize: 64
+batch_size: 16
+fold: 2
+
+#MODEL
+model: MaxNCA
+channel_n: 128
+hidden_size: 128
+steps: 64
+
+#TRAINING
+learning_rate: 0.0004
+n_epochs: 32
