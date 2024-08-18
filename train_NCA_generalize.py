@@ -11,7 +11,7 @@ import src.utils.utils as utils
 import torch.utils.data as data
 from sklearn.model_selection import train_test_split, StratifiedShuffleSplit,StratifiedKFold
 import src.datasets.Dataset as Dataset 
-from src.models.NCA import BasicNCA,MaxNCA,SuperNCA,ConvNCA, SimpleNCA
+from src.models.NCA import MaxNCA, ConvNCA, SimpleNCA
 from src.losses.LossFunctions import BCELoss
 from src.agents.Agent import Agent
 
@@ -86,14 +86,11 @@ MLL_val_loader = data.DataLoader(MLL_val_dataset, batch_size=1)
 #TRAINING
 if config["model"]=="MaxNCA":
     model=MaxNCA(channel_n=config["channel_n"], hidden_size=config["hidden_size"])
-elif config["model"]=="SuperNCA":
-    model=SuperNCA(channel_n=config["channel_n"], hidden_size=config["hidden_size"])
 elif config["model"]=="ConvNCA":
     model=ConvNCA(channel_n=config["channel_n"], hidden_size=config["hidden_size"])
-elif config["model"]=="SimpleNCA":
-    model=SimpleNCA(channel_n=config["channel_n"], hidden_size=config["hidden_size"])
 else:
-    model=BasicNCA(channel_n=config["channel_n"], hidden_size=config["hidden_size"])
+    model=SimpleNCA(channel_n=config["channel_n"], hidden_size=config["hidden_size"])
+
 model.to(device)
 agent=Agent(model,config["steps"],config["channel_n"],config["batch_size"])
 if config["train_set"]=="AML":
